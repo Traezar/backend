@@ -1,8 +1,33 @@
 language: go
-sudo: false
-before_script:
-  - go vet ./...
-install:
-  # Add Godeps dependencies to GOPATH and PATH
-  - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
-  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+
+go:
+  - "1.19"
+
+branches:
+  only:
+    - main
+
+jobs:
+  include:
+    - stage: CI
+      name: "Package & build"    
+      script:
+        - echo "Hello World"
+        - go build .
+    - name: "Run vet"
+      script:
+        - go vet .
+    - name: "Run Linting"
+      install:
+        - go get -u golang.org/x/lint/golint
+      script:
+        - golint .
+    - name: "Unit Tests"
+      script:
+        - cd test && go test -v
+
+    - stage: Deploy
+      if: branch = master
+      name: "Dummy deploy stage"
+      script:
+        - echo "Deploy"
