@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+    networks:
+      - backend_network
+    restart: always
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - ./app.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - backend_network
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 7000:7000
+    networks:
+      - backend_network
+
+volumes:
+  postgres:
+
+networks:
+  backend_network:
+    driver: bridge
