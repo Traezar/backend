@@ -3,8 +3,6 @@ language: go
 go:
   - "1.19"
 
-services:
-  - docker
 
 branches:
   only:
@@ -14,10 +12,9 @@ jobs:
   include:
     - stage: CI
       name: "Package & build"    
-      before_script:
-        - echo "Building Docker"
-        - docker-compose up --build
-        - sleep 60
+      script:
+        - echo "Hello World"
+        - go build .
     - name: "Unit Tests"
       script:
         - go test -v  ./...
