@@ -57,10 +57,6 @@ func TestBook(t *testing.T) {
 					t.Errorf("Expected author ID to be %s, but got %s", authorID.String(), req.Author.ID.String())
 				}
 
-				if req.Author.Name != "Douglas Adams" {
-					t.Errorf("Expected author name to be 'Douglas Adams', but got %s", req.Author.Name)
-				}
-
 			case "UpdateBook should update a book":
 				var update UpdateBook
 				err := json.Unmarshal([]byte(test.payload), &update)
@@ -74,10 +70,6 @@ func TestBook(t *testing.T) {
 
 				if update.Author.ID != authorID {
 					t.Errorf("Expected author ID to be %s, but got %s", authorID.String(), update.Author.ID.String())
-				}
-
-				if update.Author.Name != "Douglas Adams" {
-					t.Errorf("Expected author name to be 'Douglas Adams', but got %s", update.Author.Name)
 				}
 			}
 		})

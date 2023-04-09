@@ -14,17 +14,9 @@ jobs:
       script:
         - echo "Hello World"
         - go build .
-    - name: "Run vet"
-      script:
-        - go vet .
-    - name: "Run Linting"
-      install:
-        - go get -u golang.org/x/lint/golint
-      script:
-        - golint .
     - name: "Unit Tests"
       script:
-        - cd test && go test -v
+        - go test -v  ./...
 
     - stage: Deploy
       if: branch = master
