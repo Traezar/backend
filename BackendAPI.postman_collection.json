@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f25e298c-deba-499d-8bfd-354e2c2aba1b",
+		"_postman_id": "ed7c20e8-eff8-428d-8266-0ce0af3dee92",
 		"name": "BackendAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"johndoe4@gmail.com\",\r\n    \"name\": \"John Doe4\",\r\n    \"password\": \"password123\",\r\n    \"passwordConfirm\": \"password123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"raj@gmail.com\",\r\n    \"name\": \"raj\",\r\n    \"password\": \"password123\",\r\n    \"passwordConfirm\": \"password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"johndoe@gmail.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"raj@gmail.com\",\r\n    \"password\": \"password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -83,6 +83,15 @@
 							}
 						},
 						"url": "localhost:8000/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/users/me"
 					},
 					"response": []
 				},
@@ -98,20 +107,6 @@
 			]
 		},
 		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Get Me",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "localhost:8000/api/users/me"
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Post",
 			"item": [
 				{
@@ -121,7 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Raj Me\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Raj the hackerman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,25 +132,34 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:8000/api/authors/62924309cc2f4eb8eccf0828"
+						"url": "localhost:8000/api/authors/a367e50f-e14d-45cf-82c3-a745cfb7312d"
 					},
 					"response": []
 				},
 				{
 					"name": "Update Author",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
-						"url": "localhost:8000/api/authors/62924309cc2f4eb8eccf0828"
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Raj updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/authors/a367e50f-e14d-45cf-82c3-a745cfb7312d"
 					},
 					"response": []
 				},
 				{
 					"name": "Delete Author",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
-						"url": "localhost:8000/api/authors/62924309cc2f4eb8eccf0828"
+						"url": "localhost:8000/api/authors/a367e50f-e14d-45cf-82c3-a745cfb7312d"
 					},
 					"response": []
 				},
