@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -51,7 +52,8 @@ func (pc *AuthorController) CreateAuthor(ctx *gin.Context) {
 
 // [...] Update Author Handler
 func (pc *AuthorController) UpdateAuthor(ctx *gin.Context) {
-	AuthorId := ctx.Param("authorID")
+	fmt.Printf("%+v", ctx.Params)
+	AuthorId := ctx.Param("authorId")
 
 	var payload *models.UpdateAuthor
 	if err := ctx.ShouldBindJSON(&payload); err != nil {
@@ -59,7 +61,7 @@ func (pc *AuthorController) UpdateAuthor(ctx *gin.Context) {
 		return
 	}
 	var updatedAuthor models.Author
-	result := pc.DB.First(&updatedAuthor, "id = ?", AuthorId)
+	result := pc.DB.First(&updatedAuthor, "id::text= ?", AuthorId)
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"status": "fail", "message": "No author with that name exists"})
 		return
